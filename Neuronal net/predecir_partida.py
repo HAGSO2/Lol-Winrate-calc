@@ -1,18 +1,17 @@
 import numpy as np
 import pandas as pd    
 
-def simular_partida(stats, side, modelo, scaler):
+def simular_partida(stats, modelo, scaler):
     """
     Simula una partida entre equipo_a y equipo_b.
     Retorna la probabilidad de que gane equipo_a.
     """
     
     # 1. Selecionar features
-    lista_columnas_entrenamiento =["goldat10","goldat15","xpat10","xpat15","avg_dragons_team","avg_barons_team","avg_heralds_team","avg_towers_team","avg_dragons_vs_opp","avg_barons_vs_opp","avg_heralds_vs_opp","avg_towers_vs_opp","wins_vs_opponent"]
+    lista_columnas_entrenamiento =["side","goldat10","goldat15","xpat10","xpat15","avg_dragons_team","avg_barons_team","avg_heralds_team","avg_towers_team","avg_dragons_vs_opp","avg_barons_vs_opp","avg_heralds_vs_opp","avg_towers_vs_opp","wins_vs_opponent"]
     
     # 2. Seleccionar solo las columnas que usaste en entrenamiento
     features_a = stats_a[lista_columnas_entrenamiento]
-    features_a["side"] = side
     
     # 3. Escalar los datos
     features_a_escaladas = scaler.transform(features_a)
@@ -22,8 +21,6 @@ def simular_partida(stats, side, modelo, scaler):
     
     return prob_a_gana
 
-
-import numpy as np
 
 def simular_x_partidas(equipo_a, equipo_b, num_partidas, modelo, scaler, df_equipos):
     """
@@ -64,7 +61,7 @@ def simular_x_partidas(equipo_a, equipo_b, num_partidas, modelo, scaler, df_equi
         'porcentaje_b': (victorias_b / num_partidas) * 100
     }
 
-
+"""
 # Simular 100 partidas entre LNG Esports y JD Gaming
 resultado = simular_x_partidas(
     equipo_a='LNG Esports',
@@ -78,3 +75,4 @@ resultado = simular_x_partidas(
 print(f"Resultado de 100 simulaciones:")
 print(f"{resultado['equipo_a']}: {resultado['victorias_a']} victorias ({resultado['porcentaje_a']:.1f}%)")
 print(f"{resultado['equipo_b']}: {resultado['victorias_b']} victorias ({resultado['porcentaje_b']:.1f}%)")
+"""
