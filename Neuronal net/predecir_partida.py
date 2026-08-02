@@ -1,17 +1,16 @@
 import numpy as np
 import pandas as pd    
 
-def simular_partida(stats, modelo, scaler):
+def simular_partida(stats, modelo):
     """
     Simula una partida entre equipo_a y equipo_b.
     Retorna la probabilidad de que gane equipo_a.
     """
-    
-    # 1. Selecionar features
-    lista_columnas_entrenamiento =["side","goldat10","goldat15","xpat10","xpat15","avg_dragons_team","avg_barons_team","avg_heralds_team","avg_towers_team","avg_dragons_vs_opp","avg_barons_vs_opp","avg_heralds_vs_opp","avg_towers_vs_opp","wins_vs_opponent"]
+
+    # 1. Definir features
     
     # 2. Seleccionar solo las columnas que usaste en entrenamiento
-    features_a = stats_a[lista_columnas_entrenamiento]
+    features_a = stats[lista_columnas_entrenamiento]
     
     # 3. Escalar los datos
     features_a_escaladas = scaler.transform(features_a)
