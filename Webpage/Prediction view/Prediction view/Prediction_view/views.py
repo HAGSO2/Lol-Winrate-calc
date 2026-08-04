@@ -35,3 +35,13 @@ def about():
         year=datetime.now().year,
         message='Your application description page.'
     )
+
+@app.route('/prediction')
+def prediction():
+    """Renders the prediction page."""
+    return render_template(
+        'prediction.html',
+        title='Predict',
+        year=datetime.now().year,
+        message='View the prediction based on the model'
+    )

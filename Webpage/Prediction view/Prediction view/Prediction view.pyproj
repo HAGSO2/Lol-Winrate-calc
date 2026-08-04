@@ -40,6 +40,7 @@
     <Folder Include="Prediction_view\templates\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Prediction_view\templates\prediction.html" />
     <Content Include="requirements.txt" />
     <Content Include="Prediction_view\static\content\bootstrap.css" />
     <Content Include="Prediction_view\static\content\bootstrap.min.css" />
