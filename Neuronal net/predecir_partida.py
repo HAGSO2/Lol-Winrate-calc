@@ -1,22 +1,26 @@
 import numpy as np
 import pandas as pd    
 
-def simular_partida(stats, modelo):
+def simular_partida(equipo_a, equipo_b, modelo, scaler, df_equipos):
     """
     Simula una partida entre equipo_a y equipo_b.
     Retorna la probabilidad de que gane equipo_a.
     """
 
-    # 1. Definir features
+    # 1. Obtener las features del equipo_a
+    features_a = df_equipos[df_equipos['team'] == equipo_a].copy()
+
+    # 2. Definir features
+    lista_columnas_entrenamiento = ["side","goldat10","goldat15","xpat10","xpat15","avg_dragons_team","avg_barons_team","avg_heralds_team","avg_towers_team","avg_dragons_vs_opp","avg_barons_vs_opp","avg_heralds_vs_opp","avg_towers_vs_opp","wins_vs_opponent"]
     
     # 2. Seleccionar solo las columnas que usaste en entrenamiento
-    features_a = stats[lista_columnas_entrenamiento]
+    features_a = features_a[lista_columnas_entrenamiento]
     
     # 3. Escalar los datos
     features_a_escaladas = scaler.transform(features_a)
     
     # 5. Predecir
-    prob_a_gana = modelo.predict(features_a_escaladas)[0][0]
+    prob_a_gana = modelo.predict(features_a_escaladas)
     
     return prob_a_gana
 
@@ -26,6 +30,9 @@ def simular_x_partidas(equipo_a, equipo_b, num_partidas, modelo, scaler, df_equi
     Simula num_partidas entre equipo_a y equipo_b.
     Añade ruido para que no siempre salga lo mismo.
     """
+
+    lista_columnas_entrenamiento = ["side","goldat10","goldat15","xpat10","xpat15","avg_dragons_team","avg_barons_team","avg_heralds_team","avg_towers_team","avg_dragons_vs_opp","avg_barons_vs_opp","avg_heralds_vs_opp","avg_towers_vs_opp","wins_vs_opponent"]
+    
     victorias_a = 0
     victorias_b = 0
     
